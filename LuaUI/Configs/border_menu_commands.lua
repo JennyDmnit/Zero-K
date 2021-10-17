@@ -51,6 +51,7 @@ local buildoptions = {
 		{ "platetank",  notSea=true },
 		
 		{ "striderhub" },
+		{CMD_BUILD_PLATE, tech=3 },
 	},
 
 	{-- economy
@@ -215,6 +216,7 @@ local overrides = {
 	[CMD_SMOOTH] = {texture = imageDir .. 'smooth.png'},
 	[CMD_RESTORE] = {texture = imageDir .. 'restore.png'},
 	[CMD_BUMPY] = {texture = imageDir .. 'bumpy.png'},
+	[CMD_BUILD_PLATE] = {texture = imageDir .. 'Bold/buildplate.png'},
 
 	[CMD_AREA_MEX] = {caption = '', texture = imageDir .. 'Bold/mex.png'},
 	[CMD_AREA_TERRA_MEX] = {caption = '', texture = imageDir .. 'Bold/mex.png'},
@@ -325,6 +327,7 @@ local custom_cmd_actions = {	-- states are 2, not states are 1
 	radialmenu=1,
 	placebeacon=1,
 	evacuate=1,
+	buildplate=1,
 
 	-- terraform
 	rampground=1,
