@@ -136,6 +136,7 @@ options_order = {
 	'viewstandard',
 	'viewheightmap',
 	'viewblockmap',
+	'showpath',
 	'viewfow',
 	'showeco',
 	
@@ -225,6 +226,36 @@ options = {
 		desc = 'Select a unit to see where it can go. Select a building blueprint to see where it can be placed.',
 		type = 'button',
 		action = 'showpathtraversability',
+		path = hotkeysPath,
+	},
+
+	showpath = {
+		name = 'Toggle Pathing Map v2',
+		desc = 'With nothing selected show a slope map. Select a unit to see where it can go. Select a building blueprint to see where it can be placed.',
+		hotkey = {key='f2', mod=''},
+		type ='button',
+		action='showpath',
+		noAutoControlFunc = true,
+		OnChange = function(self)
+			if (WG.TogglePath) then
+				WG.TogglePath()
+			end
+		end,
+		path = hotkeysPath,
+	},
+
+	showeco = {
+		name = 'Toggle Economy Overlay',
+		desc = 'Show metal, geo spots and energy grid',
+		hotkey = {key='f2', mod=''},
+		type ='button',
+		action='showeco',
+		noAutoControlFunc = true,
+		OnChange = function(self)
+			if (WG.ToggleShoweco) then
+				WG.ToggleShoweco()
+			end
+		end,
 		path = hotkeysPath,
 	},
 	
@@ -819,6 +850,7 @@ MakeMinimapWindow = function()
 			MakeMinimapButton( nil, {option = 'viewstandard'} ),
 			MakeMinimapButton( 'LuaUI/images/map/heightmap.png', {option = 'viewheightmap'} ),
 			MakeMinimapButton( 'LuaUI/images/map/blockmap.png', {option = 'viewblockmap'} ),
+			MakeMinimapButton( 'LuaUI/images/map/metalmap.png', {name = "Toggle Path Overlay", action = 'showpath', desc = " (show metal, geo spots and pylon fields)"}),	-- handled differently because command is registered in another widget
 			MakeMinimapButton( 'LuaUI/images/map/metalmap.png', {name = "Toggle Eco Display", action = 'showeco', desc = " (show metal, geo spots and pylon fields)"}),	-- handled differently because command is registered in another widget
 			
 			Chili.Label:New{

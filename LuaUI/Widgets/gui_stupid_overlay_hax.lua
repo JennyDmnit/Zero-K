@@ -32,7 +32,7 @@ end
 
 function WG.Overlay_TogglePathMap()
 	if pathMapEnabled then
-		Spring.SendCommands('showpathtraversability')
+		Spring.SendCommands('showpath')
 		if losMapEnabled then
 			Spring.SendCommands('togglelos')
 		end
@@ -41,7 +41,7 @@ function WG.Overlay_TogglePathMap()
 		if losMapEnabled then
 			Spring.SendCommands('togglelos')
 		end
-		Spring.SendCommands('showpathtraversability')
+		Spring.SendCommands('showpath')
 		pathMapEnabled = true
 	end
 end

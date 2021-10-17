@@ -53,6 +53,7 @@ local teamcolor_selector, mapOverlay
 local buttons = {}
 local strings = {
 	toggle_eco_display = {"", ""},
+	toggle_path_display = {"", ""},
 	place_retreat_zone = {"", ""},
 	place_ferry_route = {"", ""},
 	viewstandard = {"", ""},
@@ -88,6 +89,19 @@ options = {
 	viewblockmap = {
 		type = 'button',
 		action = 'showpathtraversability',
+	},
+	showpath = {
+		name = 'Toggle Pathability Overlay',
+		desc = 'Show the default spring overlay when a unit is selected, show the new overlay when no unit is selected',
+		hotkey = {key='f2', mod=''},
+		type ='button',
+		action='showpath',
+		noAutoControlFunc = true,
+		OnChange = function(self)
+			if (WG.TogglePath) then
+				WG.TogglePath()
+			end
+		end,
 	},
 	viewfow = {
 		type = 'button',
@@ -479,14 +493,21 @@ local function InitializeControls()
 	mapOverlay = MakeDropdownButtons(contentHolder, offset, overlayConfig)
 	mapOverlay.UpdateOverlayImage()
 	offset = offset + 1
-	
+
+	-- handled differently because command is registered in another widget
+	buttons.toggle_path_display = MakeCommandButton(contentHolder, offset,
+		'LuaUI/images/visible_energy.png',
+		{action = 'showpath'}
+	)
+	offset = offset + 1
+
 	-- handled differently because command is registered in another widget
 	buttons.toggle_eco_display = MakeCommandButton(contentHolder, offset,
 		'LuaUI/images/map/metalmap.png',
 		{action = 'showeco'}
 	)
 	offset = offset + 1
-	
+
 	teamcolor_selector = MakeDropdownButtonsFromWidget(contentHolder, offset, "", 180, 'LuaUI/images/map/minimap_colors_simple.png', "Local Team Colors", "Settings/Interface/Team Colors", "colorSetting")
 	offset = offset + 1
 	
