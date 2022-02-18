@@ -10,10 +10,8 @@ return {
 	fragment = [[
 		#version 130
 		uniform sampler2D tex0;
+		uniform Int unitsSelected;
 		varying vec2 texCoord;
-
-		const float hardCliffMax = 1.0; // sharpest bot-blocking cliff
-		const float hardCliffMin = 0.58778525229; // least sharp bot-blocking cliff
 
 		const float vehCliff = 0.4546;
 		const float botCliff = 0.8065;
@@ -32,11 +30,14 @@ return {
 			else {
 				gl_FragColor =  vec4(1.0,0.0,0.0,1.0);
 			}
-			gl_FragColor.a = 0.3;
+			if (unitsSelected > 0) {
+				gl_FragColor = vec4(1.0,0.0,1.0,1.0);
+			}
 		}
 	]],
 	uniformInt = {
 		tex0 = 0,
+		unitsSelected = select(1, Spring.GetSelectedUnitsCount ()),
 	},
 	textures = {
 		[0] = "$normals",
